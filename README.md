@@ -13,7 +13,7 @@ This project is a Node.js application built with Express and BullMQ. It is desig
 
 ### Prerequisites
 
-- Node.js (v20.x)
+- Node.js (v18.x)
 - Redis server (for BullMQ)
 
 ### Installation

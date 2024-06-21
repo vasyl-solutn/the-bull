@@ -11,7 +11,7 @@ app.listen(port, () => {
 const myQueue = require('./queue');
 
 app.post('/add-job', async (req, res) => {
-  const { jobData } = req.body;
+  const jobData = req.body;
   try {
     const job = await myQueue.add('myJob', jobData);
     res.status(200).json({ jobId: job.id, status: 'Job added to the queue' });
