@@ -25,3 +25,6 @@ This project is a Node.js application built with Express and BullMQ. It is desig
 ## Run
 Start the server: node server.js
 Start the worker: node worker.js
+
+## Dev mode
+npm run dev
