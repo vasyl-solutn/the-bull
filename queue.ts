@@ -1,4 +1,5 @@
-const { Queue } = require('bullmq');
+import { Queue } from 'bullmq';
+
 const connection = {
   host: 'localhost',
   port: 6379,
@@ -6,4 +7,4 @@ const connection = {
 
 const myQueue = new Queue('myQueue', { connection });
 
-module.exports = myQueue;
+export default myQueue;
