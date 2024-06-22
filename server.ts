@@ -1,16 +1,16 @@
-const express = require('express');
+import express, { Request, Response } from 'express';
+import myQueue from './queue'; // Ensure queue.js is also converted to queue.ts and properly exports myQueue
+
 const app = express();
 const port = 3000;
 
-app.use(express.json()); // Middleware to parse JSON bodies
+app.use(express.json());
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-const myQueue = require('./queue');
-
-app.post('/add-job', async (req, res) => {
+app.post('/add-job', async (req: Request, res: Response) => {
   const jobData = req.body;
   try {
     const job = await myQueue.add('myJob', jobData);
