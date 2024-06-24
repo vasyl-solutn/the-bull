@@ -15,7 +15,9 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "tsc",
-    "dev": "nodemon src/server.ts",
-    "server": "ts-node src/server.ts"
+    "dev": "nodemon server.ts",
+    "server": "ts-node server.ts",
+    "worker": "ts-node worker.ts",
+    "worker-dev": "nodemon worker.js"
   }
 }

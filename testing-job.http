@@ -1,4 +1,9 @@
 POST http://localhost:3000/add-job
 Content-Type: application/json
 
-{"task": "email", "emailAddress": "user@example.com", "message": "Hello from the queue updated simple data!"}
+{"task": "email",
+  "emailAddress": "user@example.com",
+  "message": "Hello from the queue updated simple data!",
+  "number": 123
+}
+
