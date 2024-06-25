@@ -40,7 +40,7 @@ const worker = new Worker<JobData>('myQueue', async (job: Job<JobData>) => {
   }
 
   console.log(`Processing job ${job.id} with data:`, jobData);
-}, { connection, concurrency: 5 });
+}, { connection, concurrency: 2 });
 
 worker.on('completed', (job: Job<JobData>) => {
   console.log(`Job ${job.id} has completed!`);

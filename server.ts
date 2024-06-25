@@ -17,13 +17,14 @@ app.post('/add-job', async (req: Request, res: Response) => {
   const jobData = jobBody as JobType;
   try {
     console.log({ jobData });
-    await myQueue.add('myJob', { ...jobBody as JobData, type: "jobType2" });
+    await myQueue.add('myJob', { ...jobBody as JobData, type: "jobType2" }, { priority: 8 });
     await myQueue.add('myJob', { ...jobBody as JobData, type: "jobType1" });
-    await myQueue.add('myJob', { ...jobBody as JobData, type: "jobType2" });
+    await myQueue.add('myJob', { ...jobBody as JobData, type: "jobType2" }, { priority: 1 });
     await myQueue.add('myJob', { ...jobBody as JobData, type: "jobType3" });
 
     res.status(200).json({ status: 'Job added to the queue' });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to add the job to the queue' });
+    console.error('Error adding job to the queue:', error);
+    res.status(500).json({ error: 'Failed to add job to the queue' });
   }
 });
