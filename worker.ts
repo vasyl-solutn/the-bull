@@ -1,5 +1,5 @@
 import { Worker, Job } from 'bullmq';
-import { JobData, JobType1, JobType1Type, JobType2, JobType2Type } from './jobTypes';
+import { JobData, JobType1, JobType1Type, JobType2, JobType2Type, JobTypeCanFail, JobTypeCanFailType } from './jobTypes';
 
 const connection = {
   host: 'localhost',
@@ -23,6 +23,15 @@ const processingJobType2 = async (jobData: JobType2) => {
   jobData.result = 'JobType2 completed successfully';
 };
 
+const processingJobCanFail = async (jobData: JobTypeCanFail) => {
+  console.log('Processing JobTypeCanFail:', jobData);
+  await someAsyncOperation(200);
+  if (Math.random() > 0.15) {
+    throw new Error('JobTypeCanFail failed');
+  }
+  jobData.result = 'JobTypeCanFail completed successfully';
+};
+
 const worker = new Worker<JobData>('myQueue', async (job: Job<JobData>) => {
   const jobData = job.data;
   await job.updateProgress(50);
@@ -34,9 +43,11 @@ const worker = new Worker<JobData>('myQueue', async (job: Job<JobData>) => {
     case JobType2Type:
       await processingJobType2(jobData as JobType2);
       break;
+    case JobTypeCanFailType:
+      await processingJobCanFail(jobData as JobTypeCanFail);
+      break;
     default:
       throw new Error('Invalid job type');
-      break;
   }
 
   console.log(`Processing job ${job.id} with data:`, jobData);

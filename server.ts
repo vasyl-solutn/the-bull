@@ -21,6 +21,7 @@ app.post('/add-job', async (req: Request, res: Response) => {
     await myQueue.add('myJob', { ...jobBody as JobData, type: "jobType1" });
     await myQueue.add('myJob', { ...jobBody as JobData, type: "jobType2" }, { priority: 1 });
     await myQueue.add('myJob', { ...jobBody as JobData, type: "jobType3" });
+    await myQueue.add('myJob', { ...jobBody as JobData, type: "jobTypeCanFail" }, { attempts: 10, backoff: 300});
 
     res.status(200).json({ status: 'Job added to the queue' });
   } catch (error) {
