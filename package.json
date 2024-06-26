@@ -1,12 +1,12 @@
 {
   "dependencies": {
+    "@types/bull-arena": "^3.0.10",
     "bull-arena": "^4.4.2",
     "bullmq": "^5.8.2",
     "express": "^4.19.2",
     "ioredis": "^5.4.1"
   },
   "devDependencies": {
-    "@types/bull": "^4.10.0",
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.8",
     "nodemon": "^3.1.4",

@@ -1,12 +1,37 @@
 import express, { Request, Response } from 'express';
-import myQueue from './queue'; // Ensure queue.js is also converted to queue.ts and properly exports myQueue
+import myQueue from './queue';
 import { JobType } from 'bullmq';
 import { JobData } from './jobTypes';
+import Arena from 'bull-arena';
+import { Queue } from "bullmq";
 
 const app = express();
 const port = 3000;
 
+// Bull Arena configuration
+const arena = Arena({
+  BullMQ: Queue,
+  // FlowBullMQ: FlowProducer,
+  queues: [
+    {
+      type: 'bullmq', // Specify using BullMQ
+      name: "myJob", // Name of your queue
+      hostId: "MyAwesomeQueues", // Identifier for the host
+      redis: {
+        host: '127.0.0.1', // Redis host
+        port: 6379, // Redis port
+        // password: 'your_redis_password', // Uncomment and set your Redis password if required
+      },
+    },
+  ],
+}, {
+  basePath: '/arena', // The path to mount the Bull Arena dashboard
+  disableListen: true // Let Express handle the listening
+});
+
 app.use(express.json());
+
+app.use('/arena', arena); // Serve Bull Arena dashboard
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
