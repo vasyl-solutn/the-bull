@@ -2,20 +2,20 @@ import express, { Request, Response } from 'express';
 import myQueue from './queue';
 import { JobType } from 'bullmq';
 import { JobData } from './jobTypes';
+
 import Arena from 'bull-arena';
 import { Queue } from "bullmq";
 
 const app = express();
 const port = 3000;
 
-// Bull Arena configuration
 const arena = Arena({
   BullMQ: Queue,
   // FlowBullMQ: FlowProducer,
   queues: [
     {
       type: 'bullmq', // Specify using BullMQ
-      name: "myJob", // Name of your queue
+      name: "myQueue", // Name of your queue
       hostId: "MyAwesomeQueues", // Identifier for the host
       redis: {
         host: '127.0.0.1', // Redis host
@@ -24,8 +24,9 @@ const arena = Arena({
       },
     },
   ],
+
 }, {
-  basePath: '/arena', // The path to mount the Bull Arena dashboard
+  basePath: '/', // The path to mount the Bull Arena dashboard
   disableListen: true // Let Express handle the listening
 });
 

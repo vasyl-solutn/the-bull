@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@types/bull-arena": "^3.0.10",
     "bull-arena": "^4.4.2",
     "bullmq": "^5.8.2",
     "express": "^4.19.2",
@@ -19,6 +18,6 @@
     "dev": "nodemon server.ts",
     "server": "ts-node server.ts",
     "worker": "ts-node worker.ts",
-    "worker-dev": "nodemon worker.js"
+    "arena": "ts-node arena-app.ts"
   }
 }

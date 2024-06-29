@@ -19,7 +19,7 @@ const processingJobType1 = async (jobData: JobType1) => {
 
 const processingJobType2 = async (jobData: JobType2) => {
   console.log('Processing JobType2:', jobData);
-  await someAsyncOperation(300);
+  await someAsyncOperation(600);
   jobData.result = 'JobType2 completed successfully';
 };
 
